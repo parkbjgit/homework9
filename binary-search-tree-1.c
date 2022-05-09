@@ -259,3 +259,15 @@ void freeNode(Node* ptr)
 	}
 }
 
+int freeBST(Node* head)
+{
+	if(head->left == head)		//head->left와 head가 같으면 head 해제
+	{
+		free(head);
+		return 1;
+	}
+	Node* p = head->left; 		//p,head를 해제
+	freeNode(p);
+	free(head);
+	return 1;
+}
