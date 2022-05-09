@@ -95,6 +95,17 @@ int main()
 	return 1;
 }
 
+int initializeBST(Node** h) {
+	if(*h != NULL)
+		freeBST(*h); 		//트리가 비어있지않으면 모든 할당된 노드를 할당 해제
+
+	*h = (Node*)malloc(sizeof(Node));		//head노드를 Node의 크기만큼 동적할당+초기화
+	(*h)->left = NULL;			/* root */
+	(*h)->right = *h;
+	(*h)->key = -9999;
+	return 1;
+}
+
 void inorderTraversal(Node* ptr)
 {
 	if(ptr) {
@@ -248,15 +259,3 @@ void freeNode(Node* ptr)
 	}
 }
 
-int freeBST(Node* head)
-{
-	if(head->left == head)		//head->left와 head가 같으면 head 해제
-	{
-		free(head);
-		return 1;
-	}
-	Node* p = head->left; 		//p,head를 해제
-	freeNode(p);
-	free(head);
-	return 1;
-}
